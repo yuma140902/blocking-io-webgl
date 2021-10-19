@@ -22,22 +22,20 @@ pub fn main_js() -> Result<(), JsValue> {
 
     let document = web_sys::window().unwrap().document().unwrap();
     let body = document.body().unwrap();
-    body.style().set_property("margin", "0").unwrap();
-    body.style().set_property("padding", "0").unwrap();
+    body.style().set_property("margin", "0")?;
+    body.style().set_property("padding", "0")?;
 
     let canvas = document
-        .create_element("canvas")
-        .unwrap()
-        .dyn_into::<web_sys::HtmlCanvasElement>()
-        .unwrap();
-    body.append_child(&canvas).unwrap();
+        .create_element("canvas")?
+        .dyn_into::<web_sys::HtmlCanvasElement>()?;
+    body.append_child(&canvas)?;
 
     let canvas_w: u32 = 1024;
     let canvas_h: u32 = 640;
 
     canvas.set_width(canvas_w);
     canvas.set_height(canvas_h);
-    canvas.style().set_property("border", "solid 1px").unwrap();
+    canvas.style().set_property("border", "solid 1px")?;
 
     Ok(())
 }
